@@ -4,7 +4,8 @@ services:
   postgres:
     image: postgres:11
     container_name: postgres
-    networks: videoManagerNetwork
+    networks:
+      - videoManagerNetwork
     environment:
       - POSTGRES_PASSWORD=password
       - POSTGRES_USER=user
@@ -27,4 +28,4 @@ services:
       - ~/.video-manager/pgadmin:/var/lib/pgadmin
 
 networks:
-  - videoManagerNetwork
+  videoManagerNetwork:
