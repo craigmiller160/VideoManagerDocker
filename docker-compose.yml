@@ -1,0 +1,30 @@
+version: '3'
+
+services:
+  postgres:
+    image: postgres:11
+    container_name: postgres
+    networks: videoManagerNetwork
+    environment:
+      - POSTGRES_PASSWORD=password
+      - POSTGRES_USER=user
+    ports:
+      - 5432:5432
+    volumes:
+      - ~/.video-manager/postgres:/var/lib/postgresql/data
+
+  pgadmin:
+    image: dpage/pgadmin4
+    container_name: pgadmin
+    networks:
+      - videoManagerNetwork
+    ports:
+      - 5433:80
+    environment:
+      - PGADMIN_DEFAULT_EMAIL=user@gmail.com
+      - PGADMIN_DEFAULT_PASSWORD=password
+    volumes:
+      - ~/.video-manager/pgadmin:/var/lib/pgadmin
+
+networks:
+  - videoManagerNetwork
