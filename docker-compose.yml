@@ -13,6 +13,7 @@ services:
       - 5432:5432
     volumes:
       - ~/.video-manager/postgres:/var/lib/postgresql/data
+      - ./postgres-init:/docker-entrypoint-initdb.d
 
   pgadmin:
     image: dpage/pgadmin4
