@@ -28,5 +28,12 @@ services:
     volumes:
       - ~/.video-manager/pgadmin:/var/lib/pgadmin
 
+  video-server:
+    build:
+      context: .
+      dockerfile: video-server_Dockerfile
+    networks:
+      - videoManagerNetwork
+
 networks:
   videoManagerNetwork:
