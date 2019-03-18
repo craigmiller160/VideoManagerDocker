@@ -32,8 +32,13 @@ services:
     build:
       context: .
       dockerfile: video-server_Dockerfile
+    container_name: video-server
     networks:
       - videoManagerNetwork
+    environment:
+      - VIDEO_MANAGER_DIR=/opt/videos
+    volumes:
+      - ${VIDEO_MANAGER_DIR_PROD}=/opt/videos
 
 networks:
   videoManagerNetwork:

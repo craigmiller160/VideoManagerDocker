@@ -1,2 +1,5 @@
 FROM tomcat:9-jre11-slim
 
+COPY ./binaries/video-manager-server-*.jar /usr/local/tomcat/webapps/video-manager-server.jar
+RUN unzip /usr/local/tomcat/webapps/video-manager-server.jar -d /usr/local/tomcat/webapps/video-manager-server
+RUN rm /usr/local/tomcat/webapps/video-manager-server.jar
