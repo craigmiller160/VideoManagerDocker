@@ -39,6 +39,8 @@ services:
       - VIDEO_MANAGER_DIR=/opt/videos
     volumes:
       - ${VIDEO_MANAGER_DIR_PROD}=/opt/videos
+    ports:
+      - 9000:8080
 
 networks:
   videoManagerNetwork:
