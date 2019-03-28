@@ -37,6 +37,7 @@ services:
       - videoManagerNetwork
     environment:
       - VIDEO_MANAGER_DIR=/opt/videos
+      - VIDEO_MANAGER_DIR_PROD=${VIDEO_MANAGER_DIR_PROD}
     volumes:
       - ${VIDEO_MANAGER_DIR_PROD}=/opt/videos
     ports:

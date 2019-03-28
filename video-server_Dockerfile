@@ -1,4 +1,5 @@
 FROM openjdk:11.0.2-jre-slim
 
+RUN mkdir -p /opt/videos
 COPY ./binaries/video-manager-server-*.jar /video-manager-server.jar
 ENTRYPOINT ["java", "-jar", "/video-manager-server.jar"]
