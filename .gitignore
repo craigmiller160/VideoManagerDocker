@@ -2,3 +2,4 @@
 .idea/
 *.iml
 binaries/*.jar
+binaries/*.zip
