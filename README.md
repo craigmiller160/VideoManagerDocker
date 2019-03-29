@@ -13,3 +13,7 @@ VideoManagerClient - the client application.
 ### Envrionment Variables
 
 VIDEO_MANAGER_DIR_PROD - The path to the production directory for the videos this program will manage.
+
+### Scripts
+
+TODO - Add details about the scripts included here

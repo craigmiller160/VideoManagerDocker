@@ -40,5 +40,15 @@ services:
     volumes:
       - ${VIDEO_MANAGER_DIR_PROD}:/opt/videos
 
+  video-client:
+    build:
+      context: .
+      dockerfile: video-client_Dockerfile
+    container_name: video-client
+    networks:
+      - videoManagerNetwork
+    ports:
+      - 9000:80
+
 networks:
   videoManagerNetwork:
