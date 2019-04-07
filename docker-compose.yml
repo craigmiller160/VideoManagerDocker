@@ -50,6 +50,8 @@ services:
       - videoManagerNetwork
     ports:
       - 9000:80
+    volumes:
+      - ~/video-manager/client-logs:/var/log/nginx
 
 networks:
   videoManagerNetwork:
