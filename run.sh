@@ -1,6 +1,7 @@
 #!/bin/bash
 
-rm binaries/*
+rm binaries/*.zip
+rm binaries/*.jar
 cp ../VideoManagerClient/dist/*.zip binaries
 cp ../VideoManagerServer/target/*.jar binaries
 sudo -E docker-compose stop
