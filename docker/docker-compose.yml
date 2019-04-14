@@ -30,8 +30,8 @@ services:
 
   video-server:
     build:
-      context: ..
-      dockerfile: ../video-server_Dockerfile
+      context: .
+      dockerfile: video-server_Dockerfile
     container_name: video-server
     networks:
       - videoManagerNetwork
@@ -43,8 +43,8 @@ services:
 
   video-client:
     build:
-      context: ..
-      dockerfile: ../video-client_Dockerfile
+      context: .
+      dockerfile: video-client_Dockerfile
     container_name: video-client
     networks:
       - videoManagerNetwork
