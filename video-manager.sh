@@ -9,8 +9,8 @@ function clean {
 function copy {
     echo "Running Copy"
     clean
-    cp ../VideoManagerClient/dist/*.zip binaries
-    cp ../VideoManagerServer/target/*.jar binaries
+    cp ../../VideoManagerClient/dist/*.zip binaries
+    cp ../../VideoManagerServer/target/*.jar binaries
 }
 
 function build {
@@ -19,6 +19,31 @@ function build {
     clean
     copy
     sudo -E docker-compose build
+}
+
+function build_full {
+    echo "Running Build-Full"
+    cd ../../VideoManagerClient
+    git stash
+    git checkout master
+    yarn dist
+    if [[ $? -ne 0 ]]; then
+        echo "Error! Failed to build client app"
+        exit 1
+    fi
+
+    cd ../VideoManagerServer
+    git stash
+    git checkout master
+    mvn -P prod package
+    if [[ $? -ne 0 ]]; then
+        echo "Error! Failed to build server app"
+        exit 1
+    fi
+
+    cd ../VideoManagerDocker/docker
+
+    build
 }
 
 function start {
@@ -54,6 +79,7 @@ function help {
     echo "Video Manager Script Help"
     echo ""
     echo "build = Re-build the docker containers for the client and server apps. Runs stop, clean and copy first."
+    echo "build-full = Re-build the applications themselves using their respective build scripts, then rebuilds the docker containers. Runs stop, clean, copy, and build."
     echo "clean = Cleans the binaries directory of any applications."
     echo "copy = Copies the new application binaries to the binaries directory. Runs clean first."
     echo "export = Exports the prod data so it can be backed up"
@@ -66,6 +92,7 @@ function help {
 function parse_command {
     case $1 in
         "build") build ;;
+        "build-full") build_full ;;
         "clean") clean ;;
         "copy") copy ;;
         "export") export ;;

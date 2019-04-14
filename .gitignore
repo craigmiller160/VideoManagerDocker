@@ -1,5 +1,5 @@
 .DS_Store
 .idea/
 *.iml
-binaries/*.jar
-binaries/*.zip
+docker/binaries/*.jar
+docker/binaries/*.zip
