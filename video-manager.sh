@@ -16,7 +16,6 @@ function copy {
 function build {
     echo "Running Build"
     stop
-    clean
     copy
     sudo -E docker-compose build
 }
