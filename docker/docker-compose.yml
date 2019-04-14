@@ -1,0 +1,57 @@
+version: '3'
+
+services:
+  postgres:
+    image: postgres:11
+    container_name: postgres
+    networks:
+      - videoManagerNetwork
+    environment:
+      - POSTGRES_PASSWORD=password
+      - POSTGRES_USER=user
+    ports:
+      - 5432:5432
+    volumes:
+      - ~/.video-manager/postgres:/var/lib/postgresql/data
+      - ./postgres-init:/docker-entrypoint-initdb.d
+
+  pgadmin:
+    image: dpage/pgadmin4
+    container_name: pgadmin
+    networks:
+      - videoManagerNetwork
+    ports:
+      - 5433:80
+    environment:
+      - PGADMIN_DEFAULT_EMAIL=user@gmail.com
+      - PGADMIN_DEFAULT_PASSWORD=password
+    volumes:
+      - ~/.video-manager/pgadmin:/var/lib/pgadmin
+
+  video-server:
+    build:
+      context: ..
+      dockerfile: ../video-server_Dockerfile
+    container_name: video-server
+    networks:
+      - videoManagerNetwork
+    environment:
+      - VIDEO_MANAGER_DIR=/opt/videos
+    volumes:
+      - ${VIDEO_MANAGER_DIR_PROD}:/opt/videos
+      - ~/video-manager/server-logs:/opt/video-manager/server-logs
+
+  video-client:
+    build:
+      context: ..
+      dockerfile: ../video-client_Dockerfile
+    container_name: video-client
+    networks:
+      - videoManagerNetwork
+    ports:
+      - 9000:80
+    volumes:
+      - ~/video-manager/client-logs:/var/log/nginx
+
+networks:
+  videoManagerNetwork:
