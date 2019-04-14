@@ -16,4 +16,4 @@ VIDEO_MANAGER_DIR_PROD - The path to the production directory for the videos thi
 
 ### Scripts
 
-TODO - Add details about the scripts included here
+To run the application, use the video-manager.sh script.
